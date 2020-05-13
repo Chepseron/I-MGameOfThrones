@@ -1,0 +1,211 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:a4j="http://richfaces.org/a4j"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <f:view contentType="text/html">
+        <h:head>
+            <f:facet name="first">
+                <link href="css/main_style.css" rel="stylesheet" type="text/css" />
+                <link href="css/global.css" rel="stylesheet" type="text/css" />upload
+                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+                <title>.::GAME OF THRONES::.</title>
+            </f:facet>
+            <script type="text/javascript">
+                //<![CDATA[
+                function handleMessage(data) {
+                    var series = [],
+                            chart = PF('browserChart').plot;
+
+                    for (var key in data) {
+                        series.push([key, data[key]]);
+                    }
+
+                    chart.series[0].data = series;
+                    chart.replot();
+                }
+                //]]> 
+            </script>
+        </h:head>
+        <h:body>
+            <p:layout fullPage="true">
+                <p:layoutUnit position="north" size="60" resizable="true" closable="true" collapsible="true">
+                    <div id="navi_bar">
+                        <div class="logo"><img src="images/got-title.jpg"  width="150px" height="50px" alt=" "/></div>
+                        <div class="navi_bar_container">
+                            <div id="navi">
+                                <h:form>
+                                    <ul>
+                                        <li><a href="got.xhtml">Home</a></li>
+                                        <li><a href="characters.xhtml">Characters</a>  </li>
+                                        <li><a href="houses.xhtml">Houses</a></li>
+                                        <li><a href="books.xhtml">Books</a></li>
+                                    </ul>
+                                </h:form>
+                            </div>
+                        </div>
+                    </div>
+                </p:layoutUnit>
+                <p:layoutUnit position="south" size="50" closable="true" collapsible="true">
+                    <div class="footer_content">
+                        <div class="footer_inside" style="float: right;">Copyright ©amon sabul All rights reserved.</div>
+                    </div>`
+                </p:layoutUnit>
+                <p:layoutUnit position="west" size="150" header="SETTINGS" style="border: 0 ; overflow: hidden; font-size: x-small" collapsible="true">
+                    <ui:include src="menu.xhtml" /> 
+                    <fieldset>
+                        <legend><font color="green">contact</font></legend>
+                        <b>Amon Kiptoo Sabul</b>
+                        P.O.Box ***** - 01 NAIROBI
+                        Mobile:+254-728140544
+                        Email:chepseron@gmail.com
+                    </fieldset>
+                </p:layoutUnit>
+                <p:layoutUnit position="east" size="150" header="SETTINGS" style="border: 0 ; overflow: hidden; font-size: x-small" collapsible="true">
+                    <ui:include src="menu.xhtml" /> 
+                    <fieldset>
+                        <legend><font color="green">contact</font></legend>
+                        <b>Amon Kiptoo Sabul</b>
+                        P.O.Box ***** - 01 NAIROBI
+                        Mobile:+254-728140544
+                        Email:chepseron@gmail.com
+                    </fieldset>
+                </p:layoutUnit>
+                <p:layoutUnit position="center"  style="border: 0; overflow: hidden; font-size: x-small">
+                    <div id="display_content" style=" background : url(images/bg-green.png);">
+                        <p:panel id="spanel"  style=" background: transparent;  position: relative; width: auto; height: 600px">
+                            <p:tabView  styleClass="si-icon-16x16 si-icon-edit"  style="background: transparent; width: 100%; height: 100%; border: 0" id="GOTTabView"> 
+                                <p:tab title="GAME OF THRONES HOUSES">
+                                    <h:form id="createdUsers2" style="width: auto" >
+                                        <p:dataTable var="gotss" value="#{GOT.housesList}" widgetVar="GOTTable"
+                                                     paginator="true"
+                                                     style="background: transparent; font-size:11px; width: auto"
+                                                     id="GOTTable"
+                                                     emptyMessage="No house found with given criteria" filteredValue="#{GOT.housesList}">
+                                            <p:column filterBy="#{gotss.name}" sortBy="#{gotss.name}"  headerText="Name">
+                                                <p:commandLink process="@this" styleClass="si-icon-16x16 si-icon-edit"  actionListener="#{GOT.setHouse(gotss)}"  update=":cardsDetail"  oncomplete="cardsDialog.show()"   value="#{gotss.name}">                                                  
+                                                    <f:setPropertyActionListener value="#{GOT}"   target="#{GOT.house}" />  
+                                                </p:commandLink>
+                                            </p:column>
+                                            <p:column filterBy="#{gotss.ancestralWeapons}" sortBy="#{gotss.ancestralWeapons}" headerText="Ancestral Weapons">
+                                                <p:commandLink process="@this" styleClass="si-icon-16x16 si-icon-edit"  actionListener="#{GOT.setCharacters(gots)}"   update=":cardsDetail"  oncomplete="cardsDialog.show()"   value="#{gotss.ancestralWeapons}">                                                  
+                                                    <f:setPropertyActionListener value="#{GOT}"   target="#{GOT.house}" />  
+                                                </p:commandLink>
+                                            </p:column>
+                                            <p:column filterBy="#{gotss.cadetBranches}" sortBy="#{gotss.cadetBranches}" headerText="Cadet Branches">
+                                                <p:commandLink process="@this" styleClass="si-icon-16x16 si-icon-edit"  actionListener="#{GOT.setHouse(gotss)}"  update=":cardsDetail"  oncomplete="cardsDialog.show()"   value="#{gotss.cadetBranches}">                                                  
+                                                    <f:setPropertyActionListener value="#{GOT}"   target="#{GOT.house}" />  
+                                                </p:commandLink>
+                                            </p:column>
+                                            <p:column filterBy="#{gotss.coatOfArms}" sortBy="#{gotss.coatOfArms}" headerText="coatOfArms">
+                                                <p:commandLink process="@this" styleClass="si-icon-16x16 si-icon-edit" actionListener="#{GOT.setHouse(gotss)}"  update=":cardsDetail"  oncomplete="cardsDialog.show()"   value="#{gotss.coatOfArms}">                                                  
+                                                    <f:setPropertyActionListener value="#{GOT}"   target="#{GOT.house}" />  
+                                                </p:commandLink>
+                                            </p:column>
+                                            <p:column  sortBy="#{gotss.currentLord}"  filterBy="#{gotss.currentLord}" headerText ="currentLord">
+                                                <p:commandLink process="@this" styleClass="si-icon-16x16 si-icon-edit" actionListener="#{GOT.setHouse(gotss)}"  update=":cardsDetail"  oncomplete="cardsDialog.show()"   value="#{gotss.currentLord}">                                                  
+                                                    <f:setPropertyActionListener value="#{GOT}"   target="#{GOT.house}" />  
+                                                </p:commandLink>
+                                            </p:column>
+                                            <p:column  sortBy="#{gotss.diedOut}"  filterBy="#{gotss.diedOut}" headerText ="diedOut">
+                                                <p:commandLink process="@this" styleClass="si-icon-16x16 si-icon-edit"  actionListener="#{GOT.setHouse(gotss)}" update=":cardsDetail"  oncomplete="cardsDialog.show()"   value="#{gotss.diedOut}">                                                  
+                                                    <f:setPropertyActionListener value="#{GOT}"   target="#{GOT.house}" />  
+                                                </p:commandLink>
+                                            </p:column>
+                                            <p:column  sortBy="#{gotss.founded}"  filterBy="#{gotss.founded}" headerText ="founded">
+                                                <p:commandLink process="@this" styleClass="si-icon-16x16 si-icon-edit" actionListener="#{GOT.setHouse(gotss)}"  update=":cardsDetail"  oncomplete="cardsDialog.show()"   value="#{gotss.founded}">                                                  
+                                                    <f:setPropertyActionListener value="#{GOT}"   target="#{GOT.house}" />  
+                                                </p:commandLink>
+                                            </p:column>
+                                            <p:column  sortBy="#{gotss.founder}"  filterBy="#{gotss.founder}" headerText ="founder">
+                                                <p:commandLink process="@this" styleClass="si-icon-16x16 si-icon-edit" actionListener="#{GOT.setHouse(gotss)}"  update=":cardsDetail"  oncomplete="cardsDialog.show()"   value="#{gotss.founder}">                                                  
+                                                    <f:setPropertyActionListener value="#{GOT}"   target="#{GOT.house}" />  
+                                                </p:commandLink>
+                                            </p:column>
+                                            <p:column  sortBy="#{gotss.heir}"  filterBy="#{gotss.heir}" headerText ="heir">
+                                                <p:commandLink process="@this" styleClass="si-icon-16x16 si-icon-edit" actionListener="#{GOT.setHouse(gotss)}"  update=":cardsDetail"  oncomplete="cardsDialog.show()"   value="#{gotss.heir}">                                                  
+                                                    <f:setPropertyActionListener value="#{GOT}"   target="#{GOT.house}" />  
+                                                </p:commandLink>
+                                            </p:column>
+                                            <p:column style="width:4%">
+                                                <p:commandLink process="@this" styleClass="si-icon-16x16 si-icon-edit" actionListener="#{GOT.setHouse(gotss)}"  update=":cardsDetail"  style="display: block; color:green; font-size: xx-small; border: 0" oncomplete="cardsDialog.show()"   value="DETAILS"   title="Edit  #{gotss.currentLord}'s DETAILS">                                                  
+                                                    <f:setPropertyActionListener value="#{GOT}"   target="#{GOT.house}" />  
+                                                </p:commandLink>
+                                            </p:column>
+                                        </p:dataTable>
+                                    </h:form>
+                                </p:tab>
+                            </p:tabView>
+
+                            <p:dialog header="Houses details" dynamic="true" widgetVar="cardsDialog"  showEffect="clip"  hideEffect="explode" resizable="false">
+                                <p:outputPanel id="cardsDetail" style="text-align:center;">
+                                    <p:outputLabel value=" #{GOT.house.name}"  style="color:RED; font-size: xx-large"/>
+                                    <h:panelGrid columns="4">
+                                        <h:panelGrid columns="1">
+                                            <h:graphicImage value="/images/light-green-flash.gif"   width="20px" height="20px"/>
+                                            <h:graphicImage value="/images/FlashingYellow.gif" width="20px" height="20px"/>
+                                            <p:panel>
+                                                <h:panelGrid columns="1">
+                                                    <h:commandButton value="cards"  style=" width:150px; height: 150px"  image="images/250px-Game_of_Thrones_title_card.webp" rendered="true" />
+                                                    <h:commandButton value="cards"  style=" width:150px; height: 150px"  image="images/250px-Game_of_Thrones_title_card.webp" rendered="true" />
+                                                </h:panelGrid>
+                                            </p:panel>
+                                        </h:panelGrid>
+                                        <h:panelGrid columns="1">
+                                            <h:panelGrid columns="6">
+                                                <p:outputLabel value="ANCESTRAL WEAPONS"/>
+                                                <p:outputLabel value="  :  "/>
+                                                <p:outputLabel style="color:RED"  value="#{GOT.house.ancestralWeapons}" />
+                                                <p:outputLabel value="CADET BRANCHES"/>
+                                                <p:outputLabel value="  :  "/>
+                                                <p:outputLabel  style="color:RED" value="#{GOT.house.cadetBranches}"/>
+                                                <p:outputLabel value="COAT OF ARMS"/>
+                                                <p:outputLabel value="  :  "/>
+                                                <p:outputLabel style="color:RED"  value="#{GOT.house.coatOfArms}"/>
+                                                <p:outputLabel value="CURRENT LORD"/>
+                                                <p:outputLabel value="  :  "/>
+                                                <p:outputLabel style="color:RED"  value="#{GOT.house.currentLord}"/>
+                                                <p:outputLabel value="DIED OUT?"/>
+                                                <p:outputLabel value="  :  "/> 
+                                                <p:outputLabel style="color:RED"  value="#{GOT.house.diedOut}"/>
+                                                <p:outputLabel value="FOUNDED?"/>
+                                                <p:outputLabel value="  :  "/> 
+                                                <p:outputLabel style="color:RED"  value="#{GOT.house.founded}"/>
+                                                <p:outputLabel value="FOUNDER"/>
+                                                <p:outputLabel value="  :  "/> 
+                                                <p:outputLabel style="color:RED"  value="#{GOT.house.founder}"/>
+                                                <p:outputLabel value="HEIR?"/>
+                                                <p:outputLabel value="  :  "/> 
+                                                <p:outputLabel style="color:RED"  value="#{GOT.house.heir}"/>
+                                                <p:outputLabel value="NAME"/>
+                                                <p:outputLabel value="  :  "/> 
+                                                <p:outputLabel style="color:RED"  value="#{GOT.house.name}"/>
+                                                <p:outputLabel value="OVERLOAD"/>
+                                                <p:outputLabel value="  :  "/> 
+                                                <p:outputLabel style="color:RED"  value="#{GOT.house.overlord}"/>
+                                                <p:outputLabel value="REGION"/>
+                                                <p:outputLabel value="  :  "/> 
+                                                <p:outputLabel style="color:RED"  value="#{GOT.house.region}"/>
+                                                <p:outputLabel value="URL"/>
+                                                <p:outputLabel value="  :  "/> 
+                                                <p:outputLabel style="color:RED"  value="#{GOT.house.url}"/>
+                                                <p:outputLabel value="WORDS"/>
+                                                <p:outputLabel value="  :  "/> 
+                                                <p:outputLabel style="color:RED"  value="#{GOT.house.words}"/>
+                                            </h:panelGrid>
+                                        </h:panelGrid>
+                                    </h:panelGrid>
+                                </p:outputPanel>
+                            </p:dialog>
+                        </p:panel>
+                    </div>
+                </p:layoutUnit>
+            </p:layout>
+        </h:body>
+    </f:view>
+</html>
+

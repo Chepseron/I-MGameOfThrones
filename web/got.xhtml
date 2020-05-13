@@ -1,0 +1,229 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:a4j="http://richfaces.org/a4j"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <f:view contentType="text/html">
+        <h:head>
+            <f:facet name="first">
+                <link href="css/main_style.css" rel="stylesheet" type="text/css" />
+                <link href="css/global.css" rel="stylesheet" type="text/css" />upload
+                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+                <title>.::GAME OF THRONES::.</title>
+            </f:facet>
+            <script type="text/javascript">
+                //<![CDATA[
+                function handleMessage(data) {
+                    var series = [],
+                            chart = PF('browserChart').plot;
+
+                    for (var key in data) {
+                        series.push([key, data[key]]);
+                    }
+
+                    chart.series[0].data = series;
+                    chart.replot();
+                }
+                //]]> 
+            </script>
+        </h:head>
+        <h:body>
+            <p:layout fullPage="true">
+                <p:layoutUnit position="north" size="60" resizable="true" closable="true" collapsible="true">
+                    <div id="navi_bar">
+                        <div class="logo"><img src="images/got-title.jpg"  width="150px" height="50px" alt=" "/></div>
+                        <div class="navi_bar_container">
+                            <div id="navi">
+                                <h:form>
+                                    <ul>
+                                        <li><a href="got.xhtml">Home</a></li>
+                                        <li><a href="characters.xhtml">Characters</a>  </li>
+                                        <li><a href="houses.xhtml">Houses</a></li>
+                                        <li><a href="books.xhtml">Books</a></li>
+                                    </ul>
+                                </h:form>
+                            </div>
+                        </div>
+                    </div>
+                </p:layoutUnit>
+                <p:layoutUnit position="south" size="50" closable="true" collapsible="true">
+                    <div class="footer_content">
+                        <div class="footer_inside" style="float: right;">Copyright ©amon sabul All rights reserved.</div>
+                    </div>`
+                </p:layoutUnit>
+                <p:layoutUnit position="west" size="150" header="SETTINGS" style="border: 0 ; overflow: hidden; font-size: x-small" collapsible="true">
+                    <ui:include src="menu.xhtml" /> 
+                    <fieldset>
+                        <legend><font color="green">contact</font></legend>
+                        <b>Amon Kiptoo Sabul</b>
+                        P.O.Box ***** - 01 NAIROBI
+                        Mobile:+254-728140544
+                        Email:chepseron@gmail.com
+                    </fieldset>
+                </p:layoutUnit>
+                <p:layoutUnit position="east" size="150" header="SETTINGS" style="border: 0 ; overflow: hidden; font-size: x-small" collapsible="true">
+                    <ui:include src="menu.xhtml" /> 
+                    <fieldset>
+                        <legend><font color="green">contact</font></legend>
+                        <b>Amon Kiptoo Sabul</b>
+                        P.O.Box ***** - 01 NAIROBI
+                        Mobile:+254-728140544
+                        Email:chepseron@gmail.com
+                    </fieldset>
+                </p:layoutUnit>
+                <p:layoutUnit position="center"  style="border: 0; overflow: hidden; font-size: x-small">
+                    <div id="display_content" style=" background : url(images/bg-green.png);">
+                        <p:panel id="spanel"  style=" background: transparent;  position: relative; width: 100%; height: 600px">
+                            <div>
+                                <h:panelGrid columns="4">
+                                    <p:meterGaugeChart  style="width:200px;height:150px;" intervalOuterRadius="30"  transient="true" showTickLabels="true" seriesColors="00FF00, FFFF00, FF0000" title="CHARACTERS" value="#{GOT.assignedMeter}"/>
+                                    <p:meterGaugeChart  style="width:200px;height:150px;" intervalOuterRadius="30"  transient="true" showTickLabels="true" seriesColors="00FF00, FFFF00, FF0000" title="BOOKS" value="#{GOT.assignedMeter}"/>
+                                    <p:meterGaugeChart  style="width:200px;height:150px;" intervalOuterRadius="30"  transient="true" showTickLabels="true" seriesColors="00FF00, FFFx00, FF0000" title="HOUSES" value="#{GOT.assignedMeter}"/>
+                                </h:panelGrid>
+                            </div>
+                            <p:tabView  styleClass="si-icon-16x16 si-icon-edit"  style="background: transparent; width: 100%; height: 100%; border: 0" id="GOTTabView"> 
+                                <p:tab title="GAME OF THRONES CHARACTERS" >
+                                    <h:form id="userForm" style="width: auto" > 
+                                        <p:dataTable var="gots" value="#{GOT.characterList}" widgetVar="GOTTable"
+                                                     paginator="true"
+
+                                                     style="background: transparent; font-size:11px"
+                                                     id="GOTTable"
+                                                     emptyMessage="No character found with given criteria" filteredValue="#{GOT.characterList}">
+                                            <p:column filterBy="#{gots.books}" sortBy="#{gots.books}" headerText="books" style="max-width: 100px">
+                                                <p:outputLabel value="#{gots.books}" />
+                                            </p:column>
+                                            <p:column filterBy="#{gots.aliases}" sortBy="#{gots.aliases}" headerText="aliases">
+                                                <p:outputLabel value="#{gots.aliases}" />
+                                            </p:column>
+                                            <p:column filterBy="#{gots.allegiances}" sortBy="#{gots.allegiances}" headerText="allegiances">
+                                                <p:outputLabel value="#{gots.allegiances}" />
+                                            </p:column>
+                                            <p:column filterBy="#{gots.born}" sortBy="#{gots.born}" headerText="born">
+                                                <p:outputLabel value="#{gots.born}" />
+                                            </p:column>
+                                            <p:column filterBy="#{gots.culture}" sortBy="#{gots.culture}" headerText="culture">
+                                                <p:outputLabel value="#{gots.culture}" />
+                                            </p:column>
+                                            <p:column filterBy="#{gots.died}" sortBy="#{gots.died}" headerText="died">
+                                                <p:outputLabel value="#{gots.died}" />
+                                            </p:column>
+                                            <p:column filterBy="#{gots.father}" sortBy="#{gots.father}" headerText="father">
+                                                <p:outputLabel value="#{gots.father}" />
+                                            </p:column>
+                                            <p:column filterBy="#{gots.gender}" sortBy="#{gots.gender}" headerText="gender">
+                                                <p:outputLabel value="#{gots.gender}" />
+                                            </p:column>
+                                            <p:column filterBy="#{gots.name}" sortBy="#{gots.name}" headerText="name">
+                                                <p:outputLabel value="#{gots.name}" />
+                                            </p:column>
+                                            <p:column style="width:4%">
+                                                <p:commandLink process="@this" styleClass="si-icon-16x16 si-icon-edit"   value="DETAILS"   title="Edit  #{gots.name}'s DETAILS">                                                  
+                                                    <f:setPropertyActionListener value="#{GOT}"   target="#{GOT.character}" />  
+                                                </p:commandLink>
+                                            </p:column>
+                                        </p:dataTable>
+                                    </h:form>
+                                </p:tab>
+                                <p:tab title="GAME OF THRONES HOUSES">
+                                    <h:form id="createdUsers2" style="width: auto" >
+                                        <p:dataTable var="gotss" value="#{GOT.housesList}" widgetVar="GOTTable"
+                                                     paginator="true"
+
+                                                     style="background: transparent; font-size:11px"
+                                                     id="GOTTable"
+                                                     emptyMessage="No house found with given criteria" filteredValue="#{GOT.housesList}">
+                                            <p:column filterBy="#{gotss.name}" sortBy="#{gotss.name}" headerText="Name">
+                                                <p:outputLabel value="#{gotss.name}" />
+                                            </p:column>
+                                            <p:column filterBy="#{gotss.ancestralWeapons}" sortBy="#{gotss.ancestralWeapons}" headerText="Ancestral Weapons">
+                                                <p:outputLabel value="#{gotss.ancestralWeapons}" />
+                                            </p:column>
+                                            <p:column filterBy="#{gotss.cadetBranches}" sortBy="#{gotss.cadetBranches}" headerText="Cadet Branches">
+                                                <p:outputLabel value="#{gotss.cadetBranches}" />
+                                            </p:column>
+                                            <p:column filterBy="#{gotss.coatOfArms}" sortBy="#{gotss.coatOfArms}" headerText="coatOfArms">
+                                                <p:outputLabel value="#{gotss.coatOfArms}" />
+                                            </p:column>
+                                            <p:column  sortBy="#{gotss.currentLord}"  filterBy="#{gotss.currentLord}" headerText ="currentLord">
+                                                <p:outputLabel value="#{gotss.currentLord}"   />
+                                            </p:column>
+                                            <p:column  sortBy="#{gotss.diedOut}"  filterBy="#{gotss.diedOut}" headerText ="diedOut">
+                                                <p:outputLabel value="#{gotss.diedOut}"   />
+                                            </p:column>
+                                            <p:column  sortBy="#{gotss.founded}"  filterBy="#{gotss.founded}" headerText ="founded">
+                                                <p:outputLabel value="#{gotss.founded}"   />
+                                            </p:column>
+                                            <p:column  sortBy="#{gotss.founder}"  filterBy="#{gotss.founder}" headerText ="founder">
+                                                <p:outputLabel value="#{gotss.founder}"   />
+                                            </p:column>
+                                            <p:column  sortBy="#{gotss.heir}"  filterBy="#{gotss.heir}" headerText ="heir">
+                                                <p:outputLabel value="#{gotss.heir}"   />
+                                            </p:column>
+                                            <p:column style="width:4%">
+                                                <p:commandLink process="@this" styleClass="si-icon-16x16 si-icon-edit"   value="DETAILS"   title="Edit  #{gotss.currentLord}'s DETAILS">                                                  
+                                                    <f:setPropertyActionListener value="#{GOT}"   target="#{GOT.houses}" />  
+                                                </p:commandLink>
+                                            </p:column>
+                                        </p:dataTable>
+                                    </h:form>
+                                </p:tab>
+                                <p:tab title="GAME OF THRONES BOOKS">
+                                    <h:form id="createdUsers" style="width: auto" >
+                                        <p:dataTable var="gotsss" value="#{GOT.booksList}" widgetVar="gotsssTable"
+                                                     paginator="true" 
+                                                     style="background: transparent; font-size:11px"
+                                                     id="gotsssTable"
+                                                     emptyMessage="No book found with given criteria" filteredValue="#{GOT.booksList}">
+                                            <p:column filterBy="#{gotsss.name}" sortBy="#{gotsss.name}" headerText="Name">
+                                                <p:outputLabel value="#{gotsss.name}" />
+                                            </p:column>
+                                            <p:column filterBy="#{gotsss.authors}" sortBy="#{gotsss.authors}" style="max-width: 70px" headerText="authors">
+                                                <p:outputLabel value="#{gotsss.authors}" />
+                                            </p:column>
+                                            <p:column filterBy="#{gotsss.characters}" sortBy="#{gotsss.characters}" style="max-width: 70px" headerText="characters">
+                                                <p:outputLabel value="#{gotsss.characters}" />
+                                            </p:column>
+                                            <p:column filterBy="#{gotsss.country}" sortBy="#{gotsss.country}" headerText="country">
+                                                <p:outputLabel value="#{gotsss.country}" />
+                                            </p:column>
+                                            <p:column  sortBy="#{gotsss.isbn}"  filterBy="#{gotsss.isbn}" headerText ="isbn">
+                                                <p:outputLabel value="#{gotsss.isbn}"   />
+                                            </p:column>
+                                            <p:column  sortBy="#{gotsss.mediaType}"  filterBy="#{gotsss.mediaType}" headerText ="mediaType">
+                                                <p:outputLabel value="#{gotsss.mediaType}"   />
+                                            </p:column>
+                                            <p:column  sortBy="#{gotsss.numberOfPages}"  filterBy="#{gotsss.numberOfPages}" headerText ="numberOfPages">
+                                                <p:outputLabel value="#{gotsss.numberOfPages}"   />
+                                            </p:column>
+                                            <p:column  sortBy="#{gotsss.publisher}"  filterBy="#{gotsss.publisher}" headerText ="publisher">
+                                                <p:outputLabel value="#{gotsss.publisher}"   />
+                                            </p:column>
+                                            <p:column  sortBy="#{gotsss.released}"  filterBy="#{gotsss.released}" headerText ="released">
+                                                <p:outputLabel value="#{gotsss.released}"   />
+                                            </p:column>
+                                            <p:column style="width:4%">
+                                                <p:commandLink process="@this" styleClass="si-icon-16x16 si-icon-edit"  value="DETAILS"   title="Edit  #{gotsss.name}'s DETAILS">                                                  
+                                                    <f:setPropertyActionListener value="#{GOT}"   target="#{GOT.houses}" />  
+                                                </p:commandLink>
+                                            </p:column>
+                                        </p:dataTable>
+                                    </h:form>
+                                </p:tab>
+                            </p:tabView>
+                            <p:dialog header="transaction details" dynamic="true" widgetVar="cardsDialog"  showEffect="clip"  hideEffect="explode" resizable="false">
+                                <p:outputPanel id="cardsDetail" style="text-align:center;">
+                                </p:outputPanel>
+                            </p:dialog> 
+                        </p:panel>
+                    </div>
+                </p:layoutUnit>
+            </p:layout>
+        </h:body>
+    </f:view>
+</html>
+
