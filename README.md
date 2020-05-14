@@ -12,9 +12,11 @@ the test classes for the services(characterService.java,booksService.java, house
 To execute you just open the project from netbeans and run it.
 If possible you can add on extra clicks from the character urls same to books and houses
 
+Characters
+
+![Image description](https://github.com/Chepseron/I-MGameOfThrones/blob/master/characters%20general.PNG)
 
 Sample Character
-
 
 ![Image description](https://github.com/Chepseron/I-MGameOfThrones/blob/master/characters.PNG)
 
