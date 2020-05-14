@@ -11,3 +11,5 @@ Primefaces 5
 the test classes for the services(characterService.java,booksService.java, housesService.java.GOT.java) are found in Test Packages
 To execute you just open the project from netbeans and run it.
 If possible you can add on extra clicks from the character urls same to books and houses
+
+![Image description](link-to-image)
